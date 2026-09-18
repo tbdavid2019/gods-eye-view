@@ -1,10 +1,39 @@
 # Changelog
 
-- Add Traditional Chinese (繁體中文, zh-TW) UI localization with runtime language switcher and automatic locale detection.
-- Add configurable OpenAI-compatible LLM Base URL, custom model name with quick-fill presets (ChatGPT, Groq, Grok, Ollama, DeepSeek), and Web Speech Synthesis (TTS) fallback in Provider Settings.
-- Add Taiwan Freeway and urban CCTV camera coverage (25 curated cameras) with continuous dynamic MJPEG video streaming support and Taipei destination POI presets.
+## [Taiwan Edition 台灣版更新] - 2026-09-18
 
-- Distinguish PARTIAL vessel snapshots from STALE data in the layer panel, with
+### 🇹🇼 繁體中文全站介面 (Traditional Chinese Localization)
+- **零依賴輕量級 i18n 系統**：新增 `src/i18n/` 模組，提供 `en.js` 與 `zh-TW.js`，盤點並翻譯超過 240 個全站介面文字與提示詞條。
+- **動態切換語系**：頂部導航列新增語言切換按鈕（`#lang-switch-btn`），點擊即可無縫切換繁體中文與英文，無須重新載入頁面。
+- **持久化儲存與環境自動偵測**：升級存儲鍵值為 `gev:locale:v2`，優先依據瀏覽器環境預設繁中，解決舊快取殘留問題；Node 測試環境自動回退英文字典以保證相容性。
+- **全站 HTML 模板掛載**：主控台 (Cockpit)、情資導航 (Context)、命令面板 (Command Dock)、圖層控制 (Layer Panels)、視覺風格 (Visual Presets)、歡迎引導 (Welcome) 及金鑰設定 (Provider Settings) 均已完整掛載 `data-i18n` 屬性。
+
+### 🤖 自訂 LLM Base URL、模型名稱與預設快捷選項 (OpenAI-Compatible LLM)
+- **開放自訂端點**：Provider Settings（金鑰設定）新增 `llm-base-url` (`OPENAI_BASE_URL`)、`llm-model` (`OPENAI_HUD_SUMMARY_MODEL`) 與 `tts-base-url` (`TTS_BASE_URL`)。
+- **主流服務一鍵填入**：
+  - **ChatGPT**: `https://api.openai.com/v1` (`gpt-4o-mini`)
+  - **Groq**: `https://api.groq.com/openai/v1` (`llama-3.3-70b-versatile`)
+  - **Grok (xAI)**: `https://api.x.ai/v1` (`grok-beta`)
+  - **Ollama**: `http://localhost:11434/v1` (`llama3.2`)
+  - **DeepSeek**: `https://api.deepseek.com/v1` (`deepseek-chat`)
+- **通用 Chat Completions 架構**：`server/providers/openai/hud-summary.js` 升級為標準 `/v1/chat/completions` 協議，包含 system 與 user prompt，保持 fail-soft 容錯降級。
+- **語音合成 (TTS / YYS)**：新增 `/api/tts` 後端轉發與前端 Web Speech Synthesis API 雙向支援，具備繁體中文與英語語音播報能力。
+- **私有區網授權存取**：支援 `GEV_ALLOW_LAN_SETUP=1`，允許來自 LAN（`10.x.x.x`、`192.168.x.x`、`172.16.x.x`）的內部主機安全開啟與管理金鑰設定。
+
+### 🛣️ 台灣道路即時監視器與動態影片串流 (Taiwan CCTV & MJPEG Streaming)
+- **25 支精選台灣即時監視器** (`config/cctv_sources.taiwan.json`)：
+  - 國道 1 號：基隆端、圓山、台北/三重、林口、桃園機場系統、新竹、台中、台南、高雄鼎金。
+  - 國道 3 號：南港、木柵、中和、三鶯、關西、霧峰系統。
+  - 國道 5 號：石碇、坪林雪山隧道北口、頭城雪山隧道南口、宜蘭、蘇澳端。
+  - 台北市信義區：台北 101 高畫質景觀即時串流。
+- **動態影片串流 (Live Motion Streaming)**：
+  - 國道攝影機支援 `"feedType": "mjpeg"`，串流端點 `/api/cctv/media/:id`。
+  - 以 `multipart/x-mixed-replace` 連續動態分塊串流取代靜態照片輪詢。
+  - 前端即時顯示 `STREAM · LIVE` 徽章，並於 3D 地球表面完成真實視錐投影。
+- **台北地標導覽**：於 `src/locations.js` 新增台北 (Taipei) 城市預設點與著名景點（台北 101、圓山大飯店、國立故宮博物院）。
+- **資料授權登錄**：於 `DATA_SOURCES.md` 依據政府資料開放授權條款登錄「交通部高速公路局」來源聲明。
+
+---
   accepted-record counts and unchanged retention, freshness and outage safeguards.
 
 - Keep Nepal provider media inside the Pinokio compatibility boundary: use

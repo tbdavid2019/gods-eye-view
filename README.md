@@ -73,6 +73,24 @@ Start with the included data sources, then add your own. Each layer is a separat
 
 ---
 
+## 🇹🇼 台灣版本特色 (Taiwan Edition Features)
+
+> 本版本由 [tbdavid2019/gods-eye-view](https://github.com/tbdavid2019/gods-eye-view) 維護，針對繁體中文語系、台灣道路情資與自訂 LLM 服務提供完整擴充：
+
+- **🌏 繁體中文全站支援 (Traditional Chinese UI)**：提供完整的繁體中文（台灣）介面、右上角即時切換按鈕（繁中 / EN），並根據瀏覽器語系自動適配。
+- **🤖 自訂 OpenAI 相容 LLM 端點 (Custom LLM Base URL)**：開放自訂 API 端點，支援 **ChatGPT**、**Groq**、**Grok (xAI)**、**Ollama (本機)**、**DeepSeek** 一鍵填入預設，並提供 Web Speech 繁中/英語音合成 (TTS)。
+- **🛣️ 台灣道路即時監視器 (Taiwan Freeway CCTV)**：收錄國道 1 號、3 號、5 號（含雪山隧道）及台北 101 等 25 支高畫質即時路況攝影機。
+- **📹 動態影片串流 (Dynamic Live MJPEG Streaming)**：採用 `multipart/x-mixed-replace` 連續動態分塊串流取代靜態照片輪詢，並於 3D 地球視錐擬真投影。
+- **📍 台北地標導覽 (Taipei City POIs)**：內建台北 101、圓山大飯店、國立故宮博物院等視角預設點。
+- **🏠 區域網路私有部署 (Private LAN Deployment)**：支援 `GEV_ALLOW_LAN_SETUP=1`，允許於區網私有主機（如 `10.x.x.x`）安全設定與管理金鑰。
+
+<div align="center">
+  <img src="docs/media/taiwan-cctv-live-streaming.png" alt="台灣國道監視器動態串流於 3D 地球視錐投影" width="90%">
+  <p><em>國道1號（台北-三重交流道）即時動態監視器畫面於 3D 地形視錐投影與全繁中介面</em></p>
+</div>
+
+---
+
 <div align="center">
 
 [![YouTube video about the God's Eye View open source release](https://img.youtube.com/vi/GRJaKcXZS94/maxresdefault.jpg)](https://www.youtube.com/watch?v=GRJaKcXZS94)
