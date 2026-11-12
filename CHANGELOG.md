@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-11-12]
+
+### 🛡️ Security & CI Runtime Upgrade (Node.js 24.22.3)
+- **CI 測試矩陣升級 Node.js 24 (`v24.22.3`)**:
+  - 更新 `.github/workflows/ci.yml` 測試矩陣 Node 24 為 `24.22.3`。
+  - 完整防護 Node.js 官方 2026-11-11 安全公告修復之多項 High severity 安全性漏洞。
+
+
 ## [Taiwan Edition 台灣版更新] - 2026-09-18
 
 ### 🇹🇼 繁體中文全站介面 (Traditional Chinese Localization)
